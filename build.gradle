@@ -1,0 +1,13 @@
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
+	
+	dependencies {    
+		testImplementation 'junit:junit:4.12'
+	   	testCompile 'junit:junit:4.12'
+		testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.1.RELEASE'
+	}    
+}

@@ -1,0 +1,53 @@
+buildscript {
+	ext {
+	    springBootVersion = '2.0.1.RELEASE'
+	}
+
+	repositories {
+        jcenter()
+	    mavenCentral()
+        maven {
+      		url "https://plugins.gradle.org/m2/"
+    	}
+	}
+	
+	dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:" + springBootVersion
+		classpath "com.avast.gradle:gradle-docker-compose-plugin:0.7.1"
+		classpath "gradle.plugin.com.github.honourednihilist:gradle-postgresql-embedded:0.4.0"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'docker-compose'
+apply plugin: 'eclipse'
+
+dockerCompose {
+    useComposeFiles = ['docker/docker-compose.yml']
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	compile "org.springframework.boot:spring-boot-starter-data-jpa:" + springBootVersion
+    compile	"org.springframework.security:spring-security-config:5.0.5.RELEASE"
+	compile "org.postgresql:postgresql:42.2.2"
+	compile "org.hsqldb:hsqldb:2.4.0"
+
+	implementation 'com.google.guava:guava:23.0'
+
+//    testCompile 'junit:junit:4.12'
+//	  testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.1.RELEASE'
+
+//    testImplementation 'junit:junit:4.12'
+   	
+    //compile "org.springframework.boot:spring-boot-starter-tomcat:" + springBootVersion
+//	  compile "org.apache.tomcat.embed:tomcat-embed-jasper:8.0.47"
+//    compile("org.springframework.boot:spring-boot-starter-security")
+//    compile("org.springframework.boot:spring-boot-starter-web")
+//    testCompile("org.springframework.security:spring-security-test")
+}
+
+dockerCompose.isRequiredBy(test)

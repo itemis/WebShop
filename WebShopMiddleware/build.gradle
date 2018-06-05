@@ -1,0 +1,19 @@
+ext {
+	springBootVersion = '2.0.1.RELEASE'
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+	compile project(':WebShopBackend')
+	compile "org.springframework.boot:spring-boot-starter-data-jpa:" + springBootVersion
+	compile "org.hsqldb:hsqldb:2.4.0"
+	
+}

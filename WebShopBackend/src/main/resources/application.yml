@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  liquibase:
+    change-log:classpath:db/db.changelog-master.xml
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/webshop
+    username: sa
+    password: passw0rd
+  ports:
+    - "5432:5432"
+  data:
+    jpa.repositories.enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      ddl-auto: create-drop
+    properties:
+      hibernate:   
+        temp:
+          use_jdbc_metadata_defaults: false
