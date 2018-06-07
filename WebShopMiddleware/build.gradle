@@ -1,5 +1,7 @@
 ext {
 	springBootVersion = '2.0.1.RELEASE'
+	springSecurityVersion = '5.0.5.RELEASE'
+	
 }
 
 apply plugin: 'java'
@@ -13,7 +15,6 @@ repositories {
 
 dependencies {
 	compile project(':WebShopBackend')
-	compile "org.springframework.boot:spring-boot-starter-data-jpa:" + springBootVersion
-	compile "org.hsqldb:hsqldb:2.4.0"
-	
+	compile "org.springframework.boot:spring-boot-starter-security:" + springBootVersion
+	compile 'org.springframework.boot:spring-boot-starter-tomcat:' + springBootVersion
 }
