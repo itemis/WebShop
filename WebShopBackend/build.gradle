@@ -32,6 +32,7 @@ repositories {
 
 dependencies {
 	compile "javax.validation:validation-api:1.0.0.GA"
+	compile "org.postgresql:postgresql:42.2.2"
 }
 
 dockerCompose.isRequiredBy(test)

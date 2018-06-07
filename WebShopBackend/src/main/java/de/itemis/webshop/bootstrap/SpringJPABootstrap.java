@@ -51,5 +51,12 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 		
 		user.setAddresses(addresses);
 		userRepository.save(user);
+
+		user = new User();
+		user.setName("Marty McFly");
+		user.setLogin("fly");
+		user.setPassword("password");
+		userRepository.save(user);
+		System.out.println("test");
 	}
 }
