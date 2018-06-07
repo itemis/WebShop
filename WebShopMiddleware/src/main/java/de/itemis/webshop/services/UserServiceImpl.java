@@ -1,6 +1,7 @@
 package de.itemis.webshop.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +26,11 @@ public class UserServiceImpl implements UserService {
 
 		return userList;
 	}
+
+	@Override
+    public User getById(Long id) {
+        return userRepository.findById(id).get();
+    }
 	
 	@Override
 	public User findByName(String username) {
