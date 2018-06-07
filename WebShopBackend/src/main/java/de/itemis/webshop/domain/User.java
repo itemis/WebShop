@@ -10,14 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import ch.qos.logback.classic.db.names.ColumnName;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "users")
@@ -28,8 +23,10 @@ public class User {
 	private Long id;
 	private String name;
 	private String login;
+	@Transient
 	private String password;
 	private String passwordHash;
+	private boolean enabled = true;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Address> addresses = new ArrayList<Address>();
@@ -72,6 +69,14 @@ public class User {
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public List<Address> getAddresses() {

@@ -1,7 +1,6 @@
 package de.itemis.webshop.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -13,36 +12,37 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
-	@Qualifier("userDetailsService")
+	// TODO @Qualifier("userDetailsService")
 	UserDetailsService userDetailsService;
-	
+
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		authenticationManagerBuilder.userDetailsService(userDetailsService);
 		authenticationManagerBuilder.authenticationProvider(authenticationProvider());
 	}
-	
+
 	@Bean
+	// TODO @Qualifier("passwordEncoder")
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 		authenticationProvider.setUserDetailsService(userDetailsService);
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
-		
+
 		return authenticationProvider;
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		//http.csrf().ignoringAntMatchers("/").disable();
-		//http.csrf().ignoringAntMatchers("/").disable().authorizeRequests().antMatchers("/**/favicon.ico").permitAll();
+		// http.csrf().ignoringAntMatchers("/").disable();
+		// http.csrf().ignoringAntMatchers("/").disable().authorizeRequests().antMatchers("/**/favicon.ico").permitAll();
 	}
 }

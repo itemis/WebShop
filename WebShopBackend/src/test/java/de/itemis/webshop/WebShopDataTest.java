@@ -24,6 +24,7 @@ import de.itemis.webshop.repositories.UserRepository;
 @DataJpaTest
 public class WebShopDataTest {
 	private static final String USER_PASSWORD = "password";
+
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
