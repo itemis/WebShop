@@ -29,6 +29,7 @@ public class UserTest {
 	
 	@Autowired
 	UserService userService;
+	
 	@Before
 	public void setUp() {
 		user_emmet_brown = new User();
