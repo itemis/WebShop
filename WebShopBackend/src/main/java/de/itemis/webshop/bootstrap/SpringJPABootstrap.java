@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import de.itemis.webshop.domain.Address;
@@ -17,6 +18,7 @@ import de.itemis.webshop.repositories.UserRepository;
 public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
 	UserRepository userRepository;
+	
 	@Autowired
 	AddressRepository addressRepository;
 	
@@ -26,12 +28,15 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 	}
 
 	private void createUsers() {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		List<Address> addresses = new ArrayList<>();
-
+		
 		User user = new User();
-		user.setName("Biff Tannen");
-		user.setLogin("tannen");
+		user.setName("myuser");
+		user.setLogin("myuser");
 		user.setPassword("password");
+		user.setPasswordHash(user.getPassword());
+		//user.setPasswordHash(encoder.encode(user.getPassword()));
 		
 		Address address = new Address();
 		address.setUser(user);
@@ -51,11 +56,13 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 		
 		user.setAddresses(addresses);
 		userRepository.save(user);
-
+		
 		user = new User();
 		user.setName("Marty McFly");
 		user.setLogin("fly");
 		user.setPassword("password");
+		user.setPasswordHash(user.getPassword());
+		//user.setPasswordHash(encoder.encode(user.getPassword()));
 		userRepository.save(user);
 		System.out.println("test");
 	}

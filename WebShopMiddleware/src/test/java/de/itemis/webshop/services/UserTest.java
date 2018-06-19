@@ -3,9 +3,6 @@ package de.itemis.webshop.services;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import de.itemis.webshop.ServiceApplication;
-import de.itemis.webshop.domain.Address;
 import de.itemis.webshop.domain.User;
 
 @RunWith(SpringRunner.class)
@@ -33,6 +29,7 @@ public class UserTest {
 	
 	@Autowired
 	UserService userService;
+	
 	@Before
 	public void setUp() {
 		user_emmet_brown = new User();
