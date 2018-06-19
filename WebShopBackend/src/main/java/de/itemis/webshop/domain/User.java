@@ -12,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -23,11 +24,12 @@ public class User {
 	private Long id;
 	private String name;
 	private String login;
-	@Transient
+	// TODO @Transient
 	private String password;
 	private String passwordHash;
 	private boolean enabled = true;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Address> addresses = new ArrayList<Address>();
 

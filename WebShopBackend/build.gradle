@@ -1,6 +1,7 @@
 buildscript {
 	ext {
-	    springBootVersion = '2.0.1.RELEASE'
+	    springBootVersion = "2.0.1.RELEASE"
+	    oAuthVersion = "2.3.3.RELEASE"
 	}
 
 	repositories {
@@ -31,8 +32,12 @@ repositories {
 }
 
 dependencies {
+	compile "org.springframework.boot:spring-boot-starter-security:" + springBootVersion
+	compile "org.springframework.boot:spring-boot-starter-web:" + springBootVersion
+	compile "org.springframework.security.oauth:spring-security-oauth2:" + oAuthVersion;
+
+	compile "org.postgresql:postgresql:42.2.2"	
 	compile "javax.validation:validation-api:1.0.0.GA"
-	compile "org.postgresql:postgresql:42.2.2"
 }
 
 dockerCompose.isRequiredBy(test)
